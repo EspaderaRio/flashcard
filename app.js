@@ -741,10 +741,6 @@ function renderBottomNav() {
       <button style="${tabStyle("themes")}" onclick="goToThemes()">
         🎨<br/>Themes
       </button>
-<button style="${tabStyle('user')}" onclick="currentView='user'; renderApp()">
-  👤<br/>User
-</button>
-
     </div>
   `;
 }
@@ -765,40 +761,6 @@ function goToThemes() {
   activeBottomTab = "themes";
   currentView = "themes"; 
   renderApp();
-}
-
-function openUserTab() {
-  activeBottomTab = "user";
-  currentView = "user";
-  renderApp();
-}
-
-function renderUserView() {
-  return `
-    <div class="p-5 max-w-md mx-auto fade-in text-center">
-      <h2 class="text-xl font-semibold mb-6">User Options</h2>
-      ${isAdmin ? 
-        `<p class="mb-4">Logged in as Admin</p>
-         <button class="px-4 py-2 rounded-xl bg-green-600 text-white" onclick="renderAdminPanel()">Manage Sets</button>` 
-        : 
-        `<button class="px-4 py-2 rounded-xl bg-blue-600 text-white" onclick="promptAdminLogin()">Admin Login</button>`}
-    </div>
-  `;
-}
-
-
-// ---------- Admin Login ----------
-const ADMIN_PASSWORD = "Rio";
-
-function promptAdminLogin() {
-  const password = prompt("Enter admin password:");
-  if (password === ADMIN_PASSWORD) {
-    alert("Welcome, Admin!");
-    currentView = "admin";
-    renderApp();
-  } else {
-    alert("Incorrect password!");
-  }
 }
 
 function renderBrowseView(publishedSets = []) {
