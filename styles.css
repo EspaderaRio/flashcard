@@ -340,7 +340,10 @@ h3 { font-size: calc(var(--font-size) * 1.4); }
   font-family: "Roboto";
   src: url("fonts/Roboto-VariableFont_wdth\,wght.ttf") format("truetype");
 }
-
+@font-face {
+  font-family: "Orbitron";
+  src: url("fonts/Orbitron-VariableFont_wght.ttf") format("truetype");
+}
 
 .settings-fab:hover {
   transform: scale(1.08) rotate(10deg);

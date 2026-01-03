@@ -177,6 +177,11 @@ if (!getUser()) {
 <button id="openSettingsBtn" class="settings-fab">
   <img src="icons/settings.svg" class="icon md" alt="settings" />
 </button>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js');
+}
+</script>
 
  </body>
  </html>

@@ -4,11 +4,6 @@ window.currentStudent =
   window.currentTheme = localStorage.getItem("flashcard-theme") || null;
 if (window.currentTheme) applyThemePreset(window.currentTheme);
 
-window.addEventListener("DOMContentLoaded", async () => {
-  await fetchPublishedSets();
-  renderApp();
-});
-
 
 (function cleanupNullQuizScores() {
   let scores = JSON.parse(localStorage.getItem("studentQuizScores") || "[]");
@@ -137,6 +132,17 @@ const THEME_PRESETS = {
       family: "BBHBorgle"
     }
   },
+ 
+futuristic: {
+  colors: {
+    primary: "#00ffea",       
+    background: "#0a0a0a",   
+    card: "#111111",          
+    text: "#00ffe0"           
+  },
+  font: { family: "Orbitron" },  
+  backgroundImage: "url('images/futuristic.svg')"
+},
 
   paper: {
     colors: {
@@ -326,8 +332,182 @@ newjeans: {
   },
   font: { family: "Open Sans" },
   backgroundImage: "url('images/newjeans.svg')"
-}
+},
+  jungle: {
+    colors: {
+      primary: "#1e5128",      
+      background: "#d4f4dd",   
+      card: "#a8e6cf",         
+      text: "#0b3d0b"          
+    },
+    font: { family: "Open Sans" },
+    backgroundImage: "url('images/jungle.svg')"
+  },
 
+  safari: {
+    colors: {
+      primary: "#c19a6b",      
+      background: "#fff8f0",   
+      card: "#f5e0c3",         
+      text: "#5a3e2b"          
+    },
+    font: { family: "Roboto" },
+    backgroundImage: "url('images/safari.svg')"
+  },
+
+  ocean: {
+    colors: {
+      primary: "#0288d1",      
+      background: "#e0f7fa",   
+      card: "#b2ebf2",         
+      text: "#014f86"          
+    },
+    font: { family: "Poppins" },
+    backgroundImage: "url('images/ocean.svg')"
+  },
+
+lake: {
+  colors: {
+    primary: "#1fa2a6",      
+    background: "#d0f0ea",   
+    card: "#a0e3d8",         
+    text: "#054d44"
+  },
+  font: { family: "Open Sans" },
+  backgroundImage: "url('images/lake.svg')"
+},
+
+    animals_jungle: {
+    colors: {
+      primary: "#1e5128",
+      background: "#d4f4dd",
+      card: "#a8e6cf",
+      text: "#0b3d0b"
+    },
+    font: { family: "Open Sans" },
+    backgroundImage: "url('images/animals_jungle.svg')"
+  },
+
+  animals_safari: {
+    colors: {
+      primary: "#c19a6b",
+      background: "#fff8f0",
+      card: "#f5e0c3",
+      text: "#5a3e2b"
+    },
+    font: { family: "Roboto" },
+    backgroundImage: "url('images/animals_safari.svg')"
+  },
+
+  animals_ocean: {
+    colors: {
+      primary: "#0288d1",
+      background: "#e0f7fa",
+      card: "#b2ebf2",
+      text: "#014f86"
+    },
+    font: { family: "Poppins" },
+    backgroundImage: "url('images/animals_ocean.svg')"
+  },
+
+  animals_pets: {
+    colors: {
+      primary: "#ff6f61",
+      background: "#fff0f0",
+      card: "#ffe6e6",
+      text: "#331a1a"
+    },
+    font: { family: "Open Sans" },
+    backgroundImage: "url('images/pets.svg')"
+  },
+
+  animals_arctic: {
+    colors: {
+      primary: "#00bcd4",
+      background: "#e0f7fa",
+      card: "#b2ebf2",
+      text: "#002f3d"
+    },
+    font: { family: "Roboto" },
+    backgroundImage: "url('images/arctic.svg')"
+  },
+
+  animals_rainforest: {
+    colors: {
+      primary: "#2e7d32",
+      background: "#dcedc8",
+      card: "#aed581",
+      text: "#1b5e20"
+    },
+    font: { family: "Open Sans" },
+    backgroundImage: "url('images/rainforest.svg')"
+  },
+
+  animals_desert: {
+    colors: {
+      primary: "#ff9800",
+      background: "#fff3e0",
+      card: "#ffe0b2",
+      text: "#5d4037"
+    },
+    font: { family: "Poppins" },
+    backgroundImage: "url('images/desert.svg')"
+  },
+
+  animals_farm: {
+    colors: {
+      primary: "#f57f17",
+      background: "#fff8e1",
+      card: "#ffecb3",
+      text: "#4e342e"
+    },
+    font: { family: "Open Sans" },
+    backgroundImage: "url('images/farm.svg')"
+  },
+
+  animals_jungle_night: {
+    colors: {
+      primary: "#0d3b1e",
+      background: "#081f0f",
+      card: "#14391c",
+      text: "#c8f5d9"
+    },
+    font: { family: "Roboto" },
+    backgroundImage: "url('images/jungle_night.svg')"
+  },
+
+  animals_deep_sea: {
+    colors: {
+      primary: "#005f73",
+      background: "#001219",
+      card: "#0a9396",
+      text: "#e0fbfc"
+    },
+    font: { family: "Poppins" },
+    backgroundImage: "url('images/deep_sea.svg')"
+  },
+
+  animals_butterflies: {
+    colors: {
+      primary: "#f48fb1",
+      background: "#fff0f6",
+      card: "#ffd6e8",
+      text: "#4a148c"
+    },
+    font: { family: "Open Sans" },
+    backgroundImage: "url('images/butterflies.svg')"
+  },
+
+  animals_tropical_birds: {
+    colors: {
+      primary: "#ff5722",
+      background: "#fff3e0",
+      card: "#ffccbc",
+      text: "#3e2723"
+    },
+    font: { family: "Roboto" },
+    backgroundImage: "url('images/tropical_birds.svg')"
+  }
 };
 
 const COLOR_PALETTES = {
@@ -685,8 +865,6 @@ let currentBrowseSetId = null;
 let currentBrowseSetCards = [];
 let currentBrowseCardIndex = 0;
 let isBrowseCardFlipped = false;
-let PUBLISHED_SETS = {};
-let isAdmin = false;
 let currentStudent = {
   name: "",
   id: ""
@@ -763,49 +941,23 @@ function goToThemes() {
   renderApp();
 }
 
-function renderBrowseView(publishedSets = []) {
-  const builtInSets = [
-    { id: 'math', name: 'Math', icon: '➗', gradient: 'from-blue-400 to-blue-600', count: 12 },
-    { id: 'science', name: 'Science', icon: '🔬', gradient: 'from-green-400 to-green-600', count: 10 },
-    { id: 'english', name: 'English', icon: '📖', gradient: 'from-purple-400 to-purple-600', count: 8 },
-    { id: 'biology', name: 'Biology', icon: '🧬', gradient: 'from-blue-600 to-green-600', count: 20 },
-    { id: 'history', name: 'History', icon: '🏛️', gradient: 'from-yellow-400 to-yellow-600', count: 15 },
-    { id: 'filipino', name: 'Filipino', icon: '🇵🇭', gradient: 'from-yellow-400 to-red-600', count: 10 },
-    { id: 'computer', name: 'ComputerScience', icon: '💻', gradient: 'from-pink-400 to-pink-600', count: 16 },
-    { id: 'geography', name: 'Geography', icon: '🌍', gradient: 'from-teal-400 to-teal-600', count: 12 },
-    { id: 'chemistry', name: 'Chemistry', icon: '⚗️', gradient: 'from-indigo-400 to-indigo-600', count: 18 },
-    { id: 'physics', name: 'Physics', icon: '🪐', gradient: 'from-gray-400 to-gray-600', count: 14 },
-    { id: 'art', name: 'Art', icon: '🎨', gradient: 'from-red-400 to-red-600', count: 10 }
-  ];
+function renderBrowseView() {
+const builtInSets = [
+  { id: 'math', name: 'Math', icon: '➗', gradient: 'from-blue-400 to-blue-600', count: 22 },
+  { id: 'science', name: 'Science', icon: '🔬', gradient: 'from-green-400 to-green-600', count: 20 },
+  { id: 'english', name: 'English', icon: '📖', gradient: 'from-purple-400 to-purple-600', count: 16 },
+  { id: 'biology', name: 'Biology', icon: '🧬', gradient: 'from-blue-600 to-green-600', count: 20 },
+  { id: 'history', name: 'History', icon: '🏛️', gradient: 'from-yellow-400 to-yellow-600', count: 10 },
+  { id: 'filipino', name: 'Filipino', icon: '🇵🇭', gradient: 'from-yellow-400 to-red-600', count: 10 },
+  { id: 'computer', name: 'ComputerScience', icon: '💻', gradient: 'from-pink-400 to-pink-600', count: 10 },
+  { id: 'geography', name: 'Geography', icon: '🌍', gradient: 'from-teal-400 to-teal-600', count: 10 },
+  { id: 'chemistry', name: 'Chemistry', icon: '⚗️', gradient: 'from-indigo-400 to-indigo-600', count: 10 },
+  { id: 'physics', name: 'Physics', icon: '🪐', gradient: 'from-gray-400 to-gray-600', count: 10 },
+  { id: 'art', name: 'Art', icon: '🎨', gradient: 'from-red-400 to-red-600', count: 10 }
+];
 
-  const seenIds = new Set();
-  const seenNames = new Set();
 
-  // Add built-in sets
-  const uniqueSets = builtInSets.filter(s => {
-    if (seenIds.has(s.id) || seenNames.has(s.name)) return false;
-    seenIds.add(s.id);
-    seenNames.add(s.name);
-    return true;
-  });
-
-  // Add published sets if they are unique
-  publishedSets.forEach(s => {
-    if (!s.id || !s.title) return; // skip invalid
-    if (seenIds.has(s.id) || seenNames.has(s.title)) return;
-    seenIds.add(s.id);
-    seenNames.add(s.title);
-
-    uniqueSets.push({
-      id: s.id,
-      name: s.title,
-      icon: '🆕',
-      gradient: 'from-pink-400 to-purple-600',
-      count: s.cards ? s.cards.length : 0
-    });
-  });
-
-  const setsHTML = uniqueSets.map(set => `
+  const setsHTML = builtInSets.map(set => `
     <div 
       class="browse-card flex flex-col items-center justify-center p-5 rounded-2xl shadow-lg cursor-pointer text-white transition transform hover:scale-105 active:scale-95 bg-gradient-to-br ${set.gradient}" 
       onclick="openBrowseSet('${set.id}')"
@@ -828,86 +980,18 @@ function renderBrowseView(publishedSets = []) {
   `;
 }
 
-async function initBrowse() {
-  try {
-    const res = await fetch('https://quiz-backend.espaderario.workers.dev/api/sets');
-    const sets = await res.json();
-
-    for (const s of sets) {
-      const qRes = await fetch(`https://quiz-backend.espaderario.workers.dev/api/quizzes/${s.id}`);
-      const quizData = await qRes.json();
-      PUBLISHED_SETS[s.id] = {
-        name: s.title,
-        cards: quizData.questions.map(q => ({
-          question: q.question,
-          answer: q.correct
-        }))
-      };
-    }
-
-    renderApp();
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-
-async function fetchPublishedSets() {
-  try {
-    const res = await fetch('https://quiz-backend.espaderario.workers.dev/api/sets');
-    const sets = await res.json();
-
-    for (const s of sets) {
-      const qRes = await fetch(`https://quiz-backend.espaderario.workers.dev/api/quizzes/${s.id}`);
-      const quizData = await qRes.json();
-      PUBLISHED_SETS[s.id] = {
-        id: s.id,
-        title: s.title,
-        cards: quizData.questions.map(q => ({
-          question: q.question,
-          answer: q.correct
-        }))
-      };
-    }
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-
-async function openBrowseSet(id) {
+function openBrowseSet(id) {
   currentBrowseSetId = id;
   currentView = "browse-cards";
-
-  if (BUILT_IN_SETS[id]) {
-    currentBrowseSetCards = BUILT_IN_SETS[id].cards;
-  } else if (PUBLISHED_SETS[id]) {
-    currentBrowseSetCards = PUBLISHED_SETS[id].cards;
-  } else {
-    try {
-      const res = await fetch(`https://quiz-backend.espaderario.workers.dev/api/quizzes/${id}`);
-      const data = await res.json();
-      currentBrowseSetCards = data.questions.map(q => ({
-        question: q.question,
-        answer: q.correct
-      }));
-    } catch {
-      currentBrowseSetCards = [];
-    }
-  }
-
   renderApp();
 }
-
-
 
 function renderBrowseCardsView() {
   if (!currentBrowseSetId) return renderBrowseView();
 
-  const data = BUILT_IN_SETS[currentBrowseSetId] || PUBLISHED_SETS[currentBrowseSetId];
+  const data = BUILT_IN_SETS[currentBrowseSetId];
   if (!data) return renderBrowseView();
 
-  const title = data.set?.name || data.name || data.title; // built-in vs published
   const cardsHTML = data.cards.map((card, i) => `
     <div class="card-preview p-4 rounded-xl mb-3"
          style="background:var(--card-bg); box-shadow:0 2px 8px rgba(0,0,0,.08);">
@@ -918,21 +1002,33 @@ function renderBrowseCardsView() {
 
   return `
     <div class="fade-in p-4 max-w-md mx-auto">
-      <button class="mb-4 px-4 py-2 rounded-lg" style="background:var(--card-bg)"
-              onclick="goBackToBrowse()">← Back</button>
-      <h2 class="text-lg font-semibold mb-4">${title}</h2>
+      <button
+        class="mb-4 px-4 py-2 rounded-lg"
+        style="background:var(--card-bg)"
+        onclick="goBackToBrowse()"
+      >
+        ← Back
+      </button>
+
+      <h2 class="text-lg font-semibold mb-4">${data.set.name}</h2>
+
       <div class="flex gap-3 mb-4">
-        <button class="flex-1 py-3 rounded-xl text-white" style="background:var(--primary)"
-                onclick="startBrowseStudy('${currentBrowseSetId}')">Study</button>
+        <button
+          class="flex-1 py-3 rounded-xl text-white"
+          style="background:var(--primary)"
+          onclick="startBrowseStudy('${currentBrowseSetId}')"
+        >
+          Study
+        </button>
       </div>
+
       ${cardsHTML}
     </div>
   `;
 }
 
-
 function startBrowseStudy(setId) {
-  const data = BUILT_IN_SETS[setId] || PUBLISHED_SETS[setId];
+  const data = BUILT_IN_SETS[setId];
   if (!data) return;
 
   currentBrowseSetCards = data.cards;
@@ -941,7 +1037,6 @@ function startBrowseStudy(setId) {
   currentView = "browse-study";
   renderApp();
 }
-
 
 // ---------- Render Browse Study as Flashcards ----------
 function renderBrowseStudyView() {
@@ -953,7 +1048,7 @@ function renderBrowseStudyView() {
 
   return `
     <div class="p-4 max-w-md mx-auto fade-in">
-      <button class="mb-4 px-4 py-2 rounded-lg" 
+      <button class="mb-4 px-4 py-2 rounded-lg"
               style="background:var(--card-bg); cursor:pointer;" 
               onclick="backToBrowseCards()">
         ← Back
@@ -1110,229 +1205,28 @@ function goBackToBrowse() {
   renderApp();
 }
 
-async function fetchSetData(setId) {
-  try {
-    const res = await fetch(`https://quiz-backend.espaderario.workers.dev/api/quizzes/${setId}`);
-    if (!res.ok) return null; // skip if 404 or other error
-    const data = await res.json();
-    return data.questions.map(q => ({ question: q.question, answer: q.correct }));
-  } catch {
-    return null; // network or other errors
-  }
-}
-// Prompt admin login
-function promptAdminLogin() {
-  const password = prompt("Enter admin password:");
-  if (password === "Rio") {
-    alert("Welcome, Admin!");
-    isAdmin = true;
-    currentView = "admin";
-    renderApp();
-  } else {
-    alert("Incorrect password!");
-  }
-}
-
-// ---------- Admin Panel for Managing Sets ----------
-async function renderAdminPanel() {
-  try {
-    // Fetch all sets with cards
-    const res = await fetch('https://quiz-backend.espaderario.workers.dev/api/sets');
-    if (!res.ok) throw new Error("Failed to load admin panel");
-
-    const sets = await res.json();
-
-    // Render each set
-    const setsHTML = sets.map(s => `
-      <div class="p-4 mb-4 border rounded-lg">
-        <h3 class="font-semibold text-lg">${s.title}</h3>
-        <button onclick="deleteSet('${s.id}')" class="px-2 py-1 bg-red-500 text-white rounded-lg mt-2">
-          Delete Set
-        </button>
-        <div class="mt-2">
-          ${renderCardsForAdmin(s)}
-        </div>
-      </div>
-    `).join('');
-
-    document.getElementById('app').innerHTML = `
-      <h2 class="text-xl font-semibold mb-6 text-center">Admin: Manage Flashcards</h2>
-      <div class="max-w-md mx-auto">
-        ${setsHTML || '<p>No sets found.</p>'}
-      </div>
-    `;
-  } catch (err) {
-    document.getElementById('app').innerHTML = `<p class="text-red-500 text-center">Failed to load admin panel: ${err.message}</p>`;
-  }
-}
-
-// Render cards safely
-function renderCardsForAdmin(set) {
-  if (!set.cards || !set.cards.length) return `<p class="text-gray-500">No cards in this set.</p>`;
-  
-  return set.cards.map((card, i) => `
-    <div class="flex justify-between items-center p-2 border-b">
-      <span>Q: ${card.question} | A: ${card.answer}</span>
-      <div class="flex gap-1">
-        <button onclick="editCard('${set.id}', ${i})" class="px-1 py-0.5 bg-yellow-500 text-white rounded">Edit</button>
-        <button onclick="deleteCard('${set.id}', ${i})" class="px-1 py-0.5 bg-red-500 text-white rounded">Delete</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-// Delete a whole set and automatically update view
-async function deleteSet(setId) {
-  if (!confirm('Are you sure you want to delete this set?')) return;
-
-  try {
-    const res = await fetch(`https://quiz-backend.espaderario.workers.dev/api/sets/${setId}`, { method: 'DELETE' });
-    if (!res.ok) throw new Error('Failed to delete set');
-
-    // Automatically remove from view
-    renderAdminPanel();
-  } catch (err) {
-    alert(err.message);
-  }
-}
-
-// Delete a single card and update view
-async function deleteCard(setId, cardIndex) {
-  if (!confirm('Delete this card?')) return;
-
-  try {
-    const setRes = await fetch(`https://quiz-backend.espaderario.workers.dev/api/quizzes/${setId}`);
-    if (!setRes.ok) throw new Error('Failed to fetch set');
-
-    const setData = await setRes.json();
-    if (!setData.questions || !setData.questions.length) return;
-
-    setData.questions.splice(cardIndex, 1);
-
-    const updateRes = await fetch(`https://quiz-backend.espaderario.workers.dev/api/quizzes/${setId}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title: setData.quiz.title, questions: setData.questions })
-    });
-    if (!updateRes.ok) throw new Error('Failed to update set');
-
-    renderAdminPanel();
-  } catch (err) {
-    alert(err.message);
-  }
-}
-
-// Edit a card
-function editCard(setId, cardIndex) {
-  const question = prompt("Enter new question:");
-  const answer = prompt("Enter new answer:");
-  if (!question || !answer) return alert("Question and answer cannot be empty");
-
-  fetch(`https://quiz-backend.espaderario.workers.dev/api/quizzes/${setId}`)
-    .then(res => res.json())
-    .then(setData => {
-      if (!setData.questions || !setData.questions.length) throw new Error("No cards to edit");
-      setData.questions[cardIndex] = { question, answer };
-      return fetch(`https://quiz-backend.espaderario.workers.dev/api/quizzes/${setId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: setData.quiz.title, questions: setData.questions })
-      });
-    })
-    .then(() => renderAdminPanel())
-    .catch(err => alert(err.message));
-}
-
-
-function renderUploadFlashcardsView() {
-  return `
-  <div class="p-5 max-w-lg mx-auto fade-in">
-    <h2 class="text-xl font-bold mb-3 text-center">📤 Upload Flashcard Set</h2>
-
-    <input id="fc-title" class="input" placeholder="Set Title" />
-    <textarea id="fc-desc" class="input mt-2" placeholder="Description (optional)"></textarea>
-    <input id="fc-author" class="input mt-2" placeholder="Your Name" />
-
-    <div id="fc-card-container" class="space-y-2 mt-4">
-      ${createFlashcardRow()}
-    </div>
-
-    <button onclick="addFlashcardRow()" class="btn mt-3 w-full">+ Add Card</button>
-
-    <button onclick="uploadFlashcardSet()" class="btn-primary w-full mt-4">
-      Upload Set 🚀
-    </button>
-  </div>
-  `;
-}
-
-function createFlashcardRow() {
-  return `
-  <div class="fc-card flex gap-2">
-    <input class="input flex-1" placeholder="Question" />
-    <input class="input flex-1" placeholder="Answer" />
-    <button onclick="this.parentElement.remove()" class="px-2 text-red-500">✖</button>
-  </div>
-  `;
-}
-
-function addFlashcardRow() {
-  document.getElementById("fc-card-container")
-    .insertAdjacentHTML("beforeend", createFlashcardRow());
-}
-
-async function uploadFlashcardSet() {
-  const title = document.getElementById("fc-title").value.trim();
-  const desc = document.getElementById("fc-desc").value.trim();
-  const author = document.getElementById("fc-author").value.trim();
-  const rows = Array.from(document.querySelectorAll(".fc-card"));
-
-  const cards = rows.map(row => {
-    const q = row.children[0].value.trim();
-    const a = row.children[1].value.trim();
-    return q && a ? { question: q, answer: a } : null;
-  }).filter(Boolean);
-
-  if (!title || cards.length === 0) {
-    alert("Title & at least 1 flashcard required.");
-    return;
-  }
-
-  // Add a placeholder subject or let user select it
-  const payload = {
-    subject_id: "user-submitted", // or let user select a subject
-    set_name: title,
-    cards
-  };
-
-  try {
-    const res = await fetch("https://quiz-backend.espaderario.workers.dev/api/sets", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-
-    const data = await res.json();
-
-    if (data.setId) {
-      alert("Flashcard set uploaded!");
-      currentView = "browse";
-      await fetchPublishedSets(); // reload browse sets
-    } else {
-      alert("Upload failed.");
-      console.error(data);
-    }
-  } catch (err) {
-    console.error(err);
-    alert("Upload failed. Check console for errors.");
-  }
-}
-
-
 function renderThemesView() {
   const categories = {
-    "Nature": ["forest", "mint", "lavender", "coffee"],
-    "K-pop": [
+  "Nature": [ 
+    "jungle", 
+    "safari", 
+    "ocean",
+    "lake"],
+  "Animals": [  
+  "animals_jungle",
+  "animals_safari",
+  "animals_ocean",
+  "animals_pets",
+  "animals_arctic",
+  "animals_rainforest",
+  "animals_desert",
+  "animals_farm",
+  "animals_jungle_night",
+  "animals_deep_sea",
+  "animals_butterflies",
+  "animals_tropical_birds"
+],
+  "K-pop": [
   "blackpink", 
   "bts", 
   "twice",
@@ -1343,9 +1237,23 @@ function renderThemesView() {
   "itzy",
   "newjeans"
 ],
-    "Dark Aesthetic": ["midnight", "graphite", "cyber"],
-    "Light & Minimal": ["light", "paper", "sunset", "rose"],
-    "Animals": ["sea", "lake"],
+"Vibes": [
+    "forest", 
+    "mint", 
+    "lavender", 
+    "coffee",
+],
+    "Dark Aesthetic": [
+      "midnight", 
+      "graphite", 
+      "cyber",
+    "futuristic"],
+
+    "Light & Minimal": [
+      "light", 
+      "paper", 
+      "sunset", 
+      "rose"]
   };
 
   const themeSection = Object.keys(categories).map(category => `
@@ -1488,7 +1396,7 @@ function renderHomeView() {
               box-shadow:0 6px 18px rgba(0,0,0,.1);
             "
           >
-            👩‍🏫 Create Quiz (Teacher)
+            👩‍🏫 Create Quiz
           </button>
 
           <!-- Student Quiz -->
@@ -1501,7 +1409,7 @@ function renderHomeView() {
               box-shadow:0 6px 18px rgba(0,0,0,.1);
             "
           >
-            👨‍🎓 Join Quiz (Student)
+            👨‍🎓 Join Quiz
           </button>
 
         </div>
@@ -1531,6 +1439,15 @@ function openStudentQuiz() {
 function renderStudentView() {
   return `
     <div class="flex flex-col items-center mt-6 space-y-6 w-full">
+<div class="w-full flex justify-start mb-2">
+  <button
+    onclick="backStudentBtn()"
+    style="color: var(--primary); background-color: var(--card-bg); border-radius: var(--radius);"
+    class="px-4 py-3 font-semibold"
+  >
+    ← Back
+  </button>
+</div>
 
       <!-- Student Tabs -->
       <div class="flex gap-2">
@@ -1664,7 +1581,7 @@ function renderJoinQuiz() {
         <!-- Quiz Join Section -->
         <h2 style="color: var(--text);" class="text-2xl font-semibold">🧠 Join Quiz</h2>
         <p style="color: var(--secondary-text);" class="text-sm mb-4">
-          Enter the quiz ID provided by your teacher
+          Enter the quiz ID provided
         </p>
 
         <input
@@ -1688,14 +1605,6 @@ function renderJoinQuiz() {
           class="w-full py-3 mb-2 font-semibold"
         >
           📊 View Score History
-        </button>
-
-        <button
-          onclick="backStudentBtn()"
-          style="background-color: var(--primary); color: white; border-radius: var(--radius);"
-          class="w-full py-3 mb-2 font-semibold"
-        >
-          Back
         </button>
 
         <div id="student-error" style="color: red;" class="mt-4 text-center"></div>
@@ -1807,8 +1716,17 @@ function backStudentBtn() {
 
 function renderTeacherView() {
   return `
-    <div  class="flex flex-col items-center mt-6 space-y-6 w-full" style="background-image: var(--background-image); background-size: cover; background-position: center;">
-
+   <div class="flex flex-col items-center mt-6 space-y-4 w-full" 
+     style="background-image: var(--background-image); background-size: cover; background-position: center;">
+  <div class="w-full flex justify-start px-4">
+    <button
+      id="backBtnTeacher"
+      class="px-4 py-2 rounded-lg"
+      style="background:var(--card-bg);"
+    >
+      ← Back
+    </button>
+  </div>
       <!-- Teacher Tabs -->
       <div class="flex gap-2">
         <button
@@ -1848,13 +1766,14 @@ function renderTeacherProfile() {
   const t = getTeacherProfile();
 
   return `
-    <div class="p-4 rounded-xl bg-white shadow space-y-3">
+    <div class="p-4 rounded-xl bg-white shadow space-y-3" style="background-color: var(--surface); color: var(--on-surface);">
       <h2 class="text-xl font-bold">Teacher Profile</h2>
 
       <div>
         <label class="block text-sm font-semibold">Name</label>
         <input id="teacher-name"
           class="w-full p-2 border rounded"
+          style="border-color: var(--border); background: var(--input-bg); color: var(--on-surface);"
           value="${t.name || ""}">
       </div>
 
@@ -1862,6 +1781,7 @@ function renderTeacherProfile() {
         <label class="block text-sm font-semibold">Subject</label>
         <input id="teacher-subject"
           class="w-full p-2 border rounded"
+          style="border-color: var(--border); background: var(--input-bg); color: var(--on-surface);"
           value="${t.subject || ""}">
       </div>
 
@@ -1869,6 +1789,7 @@ function renderTeacherProfile() {
         <label class="block text-sm font-semibold">School</label>
         <input id="teacher-school"
           class="w-full p-2 border rounded"
+           style="border-color: var(--border); background: var(--input-bg); color: var(--on-surface);"
           value="${t.school || ""}">
       </div>
 
@@ -1982,12 +1903,7 @@ function renderTeacherQuizList() {
   return `
     <div class="w-full h-full overflow-auto p-6" style="background: var(--background); font-family: var(--font-family); font-size: var(--font-size); line-height: var(--line-height);">
       <div class="max-w-2xl mx-auto fade-in">
-        <button
-  id="backBtnTeacher"
-  class="px-4 py-2 rounded-lg mb-4"
->
-  ← Back
-</button>
+
 
         <h3 style="font-size:calc(var(--font-size) * 1.2); margin-bottom:12px; color: var(--text);">📋 Your Quizzes</h3>
         ${quizListHTML}
@@ -2000,7 +1916,7 @@ function renderTeacherQuizList() {
         </button>
 
         <h2 style="font-size:calc(var(--font-size) * 1.8); margin:8px; color: var(--text);">👩‍🏫 Create Quiz</h2>
-        <p style="color: var(--secondary-text); margin-bottom:24px;">Build a quiz and share it with your students</p>
+        <p style="color: var(--secondary-text); margin-bottom:24px;">Build a quiz and share it</p>
 
         <input
           id="quiz-title"
@@ -2621,7 +2537,7 @@ function showStudentScoresByQuiz(quizId) {
         </li>
       `).join("")}
     </ul>
-    <button onclick="populateStudentScores()" class="mt-6 px-4 py-2 rounded-xl" style="background:var(--primary); color:white;">
+    <button onclick="populateStudentScores()" class="mb-4 px-4 py-2 rounded-lg" style="background:var(--card-bg); color:white;">
       ← Back to All Scores
     </button>
   `;
@@ -2881,7 +2797,7 @@ function renderStudentScoreHistoryView() {
       <button onclick="clearMyStudentScores()" class="mt-4 px-4 py-2 rounded-xl" style="background:rgba(239,68,68,.15); color:#dc2626;">
       🗑 Clear My Quiz History
       </button>
-      <button onclick="currentView='home'; renderApp();" class="mt-6 px-4 py-2 rounded-xl" style="background:var(--primary); color:white;">
+      <button onclick="currentView='home'; renderApp();" class="mb-4 px-4 py-2 rounded-lg" style="background:var(--primary); color:white;">
         ← Back to Home
       </button>
     </div>
@@ -2907,10 +2823,10 @@ function renderTeacherViewScores() {
   return `
     <div class="w-full h-full p-6">
       <button onclick="currentView='teacher'; renderApp();" 
-        class="mt-6 px-4 py-2 rounded-xl" 
+        class="mb-4 px-4 py-2 rounded-lg" 
         style="background:var(--primary); color:white;">
-        ← Back to Dashboard
-      </button> 
+        ← Back
+      </button>
       <h2 style="font-size:1.5rem; margin-bottom:16px;">📊 Student Quiz Scores</h2>
       <div id="student-score-container"></div>
       <button onclick="clearAllStudentScores()"
@@ -3004,10 +2920,29 @@ function loadSettings() {
 
 function renderCustomizationPanel() {
   return `
-    <div class="settings-header">
-      <h2>🎨 Customize Interface</h2>
-      <button id="closeSettingsBtn">✕</button>
-    </div>
+  <div id="settingsMenu" 
+  style="
+    position:relative;
+    padding:20px;
+  "
+>
+<button id="closeSettingsBtn" onclick="closeSettings()"
+  style="
+    position:absolute;
+    top:10px;
+    right:10px;
+    background:none;
+    border:none;
+    font-size:22px;
+    cursor:pointer;
+    padding:4px 8px;
+  "
+>✕</button>
+
+<div class="settings-header" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+  <h2 style="margin:0;font-size:1.2rem;font-weight:600;">🎨 Customize Interface</h2>
+</div>
+
 
 <div class="settings-group">
   <label class="setting-label">View Mode</label>
@@ -3099,7 +3034,7 @@ function renderCustomizationPanel() {
       "Open Sans", "Open Sans Italic",
       "Google Sans", "Google Sans Italic",
       "Playfair Display", "Playfair Display Italic",
-      "Roboto", "Roboto Italic"
+      "Roboto", "Roboto Italic", "Orbitron"
     ].map(f => `
             <option ${userSettings.font.family === f ? "selected" : ""}>
               ${f}
@@ -3140,6 +3075,7 @@ function renderCustomizationPanel() {
 <button onclick="resetSettings()" class="reset-btn">
   Reset to Default
 </button>
+    </div>
     </div>
   `;
 }
@@ -3282,20 +3218,14 @@ function getCardsForSet(setId) {
   return allData.filter(item => item.type === 'card' && item.set_id === setId);
 }
 
-async function renderApp() {
+function renderApp() {
   const app = document.getElementById("app");
   let content = "";
 
   if (currentView === "home") {
     content = renderHomeView();
   } else if (currentView === "browse") {
-    if (Object.keys(PUBLISHED_SETS).length === 0) {
-        content = `<div class="p-5 text-center">Loading flashcard sets...</div>`;
-    } else {
-        content = renderBrowseView(Object.values(PUBLISHED_SETS));
-    }
-  } else if (currentView === "browse-cards") {
-    content = renderBrowseCardsView();
+    content = renderBrowseView();
   } else if (currentView === "browse-study") {
     content = renderBrowseStudyView();
   } else if (currentView === "browse-quiz") {
@@ -3333,21 +3263,7 @@ async function renderApp() {
     content = renderQuizResultView();
   } else if (currentView === "customize") {
     content = renderCustomizationPanel();
-  } else if (currentView === "user") {
-    content = renderUserView();
-  } else if (currentView === "admin") {
-  if (isAdmin) {
-    await renderAdminPanel();
-    return;
-  } else {
-    alert("Not authorized!");
-    currentView = "home";
-    renderApp();
-    return;
   }
-}
-
-
 
   app.innerHTML = content;
 
@@ -3365,7 +3281,7 @@ async function renderApp() {
     attachCardsViewListeners();
   }
 
-  const showBottomNav = ["home", "browse", "themes", "user"].includes(currentView);
+  const showBottomNav = ["home", "browse", "themes"].includes(currentView);
   document.body.classList.toggle("bottom-nav-visible", showBottomNav);
 
   if (showBottomNav) {
@@ -3410,7 +3326,7 @@ function renderSubjectsView() {
     <div class="subjects-view w-full h-full overflow-auto p-4">
       <div class="max-w-4xl mx-auto">
 
-        <button id="backToHomeBtn" class="px-4 py-2 mb-4 rounded-lg shadow-sm"
+        <button id="backToHomeBtn" class="mb-4 px-4 py-2 rounded-lg"
                 style="background: var(--card-bg); color: var(--text); font-size: var(--font-size);">
           ← Back
         </button>
@@ -3484,40 +3400,33 @@ function renderSetsView() {
           <button class="study-set-btn mt-4 px-4 py-2 rounded-lg" data-set-id="${set.set_id}" 
                   style="background: var(--primary); color: white; font-size: calc(var(--font-size) * 0.875);">
             Study Now
-          </button>
-
-          <!-- Publish Button -->
-          <button class="publish-set-btn mt-2 px-4 py-2 rounded-lg" data-set-id="${set.set_id}" 
-                  style="background: var(--secondary); color: white; font-size: calc(var(--font-size) * 0.875);">
-            Publish Set
           </button>` : ''}
       </div>
     `;
   }).join('');
 
-  const html = `
+  return `
     <div class="w-full h-full overflow-auto">
       <div class="min-h-full flex flex-col p-6">
         <div class="max-w-4xl w-full mx-auto">
 
           <!-- Header -->
-          <div class="flex items-center justify-between mb-8 slide-in">
-            <button id="backToSubjectsBtn" class="px-4 py-2 rounded-lg transition-all" 
-                    style="background: var(--card-bg); color: var(--text); font-size: var(--font-size); box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-              ← Back
-            </button>
-            
-            <div class="text-center">
-              <div style="font-size:calc(var(--font-size) * 2); margin-bottom: 0.25rem;">
-                ${currentSubject.subject_icon}
-              </div>
-              <h2 style="font-size:calc(var(--font-size) * 1.8); font-weight: 500; color: var(--text);">
-                ${currentSubject.subject_name}
-              </h2>
-            </div>
+                <div class="mb-4">
+        <button id="backToSubjectsBtn" class="px-4 py-2 rounded-lg"
+                style="background: var(--card-bg); color: var(--text); font-size: var(--font-size);">
+          ← Back
+        </button>
+      </div>
 
-            <div style="width: 50px;"></div>
-          </div>
+      <!-- Centered Title + Icon -->
+      <div class="text-center mb-8 slide-in">
+        <div style="font-size: calc(var(--font-size) * 2); margin-bottom: 0.25rem;">
+          ${currentSubject.subject_icon}
+        </div>
+        <h2 style="font-size: calc(var(--font-size) * 1.8); font-weight: 500; color: var(--text);">
+          ${currentSubject.subject_name}
+        </h2>
+      </div>
 
           <!-- Add Set Button -->
           <div class="mb-6">
@@ -3537,77 +3446,6 @@ function renderSetsView() {
       </div>
     </div>
   `;
-
-setTimeout(() => {
-  document.querySelectorAll('.publish-set-btn').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      const setId = btn.dataset.setId;
-      const set = sets.find(s => s.set_id === setId);
-      if (!set) return;
-
-      const cards = getCardsForSet(set.set_id);
-      if (!cards || cards.length === 0) return alert('Cannot publish an empty set.');
-
-      const payload = {
-        subject_id: currentSubject.subject_id,
-        set_name: set.set_name,
-        cards
-      };
-
-      try {
-        const res = await fetch('https://quiz-backend.espaderario.workers.dev/api/sets', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        const data = await res.json();
-        if (data.success) {
-          alert(`Set "${set.set_name}" published!`);
-
-          // Refresh the browse tab to include newly published sets
-          if (typeof fetchPublishedSets === 'function') fetchPublishedSets();
-        } else {
-          alert('Failed to publish set: ' + (data.message || 'Unknown error'));
-        }
-      } catch (err) {
-        console.error(err);
-        alert('Error publishing set to server');
-      }
-    });
-  });
-}, 0);
-
-  return html;
-}
-
-async function publishSetFrontend(setName, cards) {
-  if (!currentSubject || !currentSubject.subject_id) return;
-
-  const payload = {
-    subject_id: currentSubject.subject_id,
-    set_name: setName,
-    cards
-  };
-
-  try {
-    const res = await fetch('https://quiz-backend.espaderario.workers.dev/api/sets', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-
-    const data = await res.json();
-    if (data.success) {
-      alert(`Set "${setName}" published!`);
-      if (typeof renderBrowseTab === 'function') renderBrowseTab();
-    } else {
-      alert('Failed to publish set: ' + (data.message || 'Unknown error'));
-    }
-  } catch (err) {
-    console.error(err);
-    alert('Error publishing set to server');
-  }
 }
 
 function openSet(setId) {
@@ -3656,21 +3494,19 @@ function renderCardsView() {
     <div class="view-container w-full h-full overflow-auto">
       <div class="view-content max-w-4xl mx-auto p-6">
         <div class="view-inner">
+              <div class="mb-4">
+        <button id="backToSetsBtn"
+                class="px-4 py-2 rounded-lg"
+                style="background: var(--card-bg); color: var(--text); font-size: var(--font-size);">
+          ← Back
+        </button>
+      </div>
 
-          <!-- HEADER -->
-          <div class="cards-header flex items-center justify-between mb-6 slide-in">
-            <button id="backToSetsBtn" class="btn-back px-4 py-2 rounded-lg"
-                    style="background: var(--card-bg); color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,.08);">
-              <img src="icons/back.svg" class="icon sm" /> Back
-            </button>
-
-            <div class="cards-title text-center">
-              <h2 class="text-xl font-semibold">${currentSet.set_name}</h2>
-              <p class="text-sm text-gray-500">${cards.length} card${cards.length !== 1 ? "s" : ""}</p>
-            </div>
-
-            <div class="header-spacer w-12"></div>
-          </div>
+      <!-- HEADER CENTERED -->
+      <div class="text-center mb-6 slide-in">
+        <h2 class="text-xl font-semibold">${currentSet.set_name}</h2>
+        <p class="text-sm opacity-70">${cards.length} card${cards.length !== 1 ? "s" : ""}</p>
+      </div>
 
           <!-- ACTIONS -->
           <div class="cards-actions">
@@ -3904,19 +3740,20 @@ function renderStudyView() {
         <div class="w-full h-full overflow-auto">
           <div class="min-h-full flex flex-col p-6">
             <div class="max-w-3xl w-full mx-auto flex flex-col" style="height: 100%;">
-              <div class="flex items-center justify-between mb-6 slide-in">
-                <button id="backToCardsBtn" class="px-4 py-2 rounded-lg transition-all" style="background: var(--card-bg); color: var(--text); font-size: var(--font-size);
- box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                                      <button id="backToCardsBtn" class="mb-4 px-4 py-2 rounded-lg" style="width:80px; background: var(--card-bg); color: var(--text); font-size: var(--font-size);">
                   ← Back
                 </button>
-                <div class="text-center">
-                  <h2 style="font-size: calc(var(--font-size) * 1.5);
- font-weight: 400; color: var(--text);">${currentSet.set_name}</h2>
-                  <p style="font-size: calc(var(--font-size) * 0.875);
- color: ${subtitleColor};">Card ${currentCardIndex + 1} of ${cards.length}</p>
-                </div>
-                <div style="width: 50px;"></div>
-              </div>
+<div class="flex flex-col items-center mb-6 slide-in text-center">
+  <h2 style="font-size: calc(var(--font-size) * 1.5); font-weight: 400; color: var(--text);">
+    ${currentSet.set_name}
+  </h2>
+<p style="opacity:0.8;font-size: calc(var(--font-size)*0.95); margin-top:4px;">
+  <span style="color:var(--primary); font-weight:600;">${currentCardIndex + 1}</span>
+  <span style="color: var(--text);"> / ${cards.length}</span>
+</p>
+
+</div>
+
               
               <div class="w-full rounded-full mb-6" style="background: rgba(0,0,0,0.1); height: 5px;">
                 <div class="progress-bar h-full rounded-full" style="width: ${progress}%; background: var(--primary);"></div>
