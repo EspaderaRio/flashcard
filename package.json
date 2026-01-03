@@ -1,5 +1,5 @@
 {
-  "name": "qzers",
+  "name": "flashcard",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -8,13 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EspaderaRio/Qzers.git"
+    "url": "git+https://github.com/EspaderaRio/flashcard.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/EspaderaRio/Qzers/issues"
+    "url": "https://github.com/EspaderaRio/flashcard/issues"
   },
-  "homepage": "https://github.com/EspaderaRio/Qzers#readme"
+  "homepage": "https://github.com/EspaderaRio/flashcard#readme"
 }
