@@ -1,48 +1,52 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 
 const ROOT = "./";
-const IGNORE = [
+const IGNORE = new Set([
   "node_modules",
   ".git",
   "generate-cache-list.js",
   "service-worker.js"
-];
+]);
 
-let assets = [];
+const assets = [];
 
+/**
+ * Recursively scan a directory and collect file paths
+ * @param {string} dir
+ */
 function scanDirectory(dir) {
-  const entries = fs.readdirSync(dir);
-
-  for (const entry of entries) {
+  for (const entry of fs.readdirSync(dir)) {
     const fullPath = path.join(dir, entry);
 
-    if (IGNORE.some(ignore => fullPath.includes(ignore))) continue;
+    if ([...IGNORE].some(ignore => fullPath.includes(ignore))) continue;
 
     const stat = fs.statSync(fullPath);
 
     if (stat.isDirectory()) {
       scanDirectory(fullPath);
     } else {
-      assets.push(fullPath.replace(/\\/g, "/").replace("./", "./"));
+      // Normalize paths for cross-platform compatibility
+      assets.push(fullPath.replace(/\\/g, "/").replace(/^\.\//, "./"));
     }
   }
 }
 
+// Start scanning
 scanDirectory(ROOT);
 
-// Force index.html & root at top
-assets = ["./", "./index.html", ...assets.filter(a => a !== "./index.html")];
+// Ensure root and index.html are first
+const orderedAssets = ["./", "./index.html", ...assets.filter(a => a !== "./index.html")];
 
+// Generate the output JS
 const output = `
+// auto-generated — do not modify manually!
 const CACHE = "flashcards-v" + Date.now();
 
-const ASSETS = ${JSON.stringify(assets, null, 2)};
-
-// auto-generated — do not modify manually!
+const ASSETS = ${JSON.stringify(orderedAssets, null, 2)};
 `;
 
 fs.writeFileSync("generated-assets.js", output);
 
 console.log("✔ Cache list generated in: generated-assets.js");
-console.log(`📦 Total assets cached: ${assets.length}`);
+console.log(`📦 Total assets cached: ${orderedAssets.length}`);
