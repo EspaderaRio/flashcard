@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "fs/promises";
 import path from "path";
 
 const ROOT = "./";
@@ -6,47 +6,49 @@ const IGNORE = new Set([
   "node_modules",
   ".git",
   "generate-cache-list.js",
-  "service-worker.js"
+  "service-worker.js",
+  "generated-assets.js"
 ]);
 
 const assets = [];
 
 /**
- * Recursively scan a directory and collect file paths
+ * Recursively scan directories and collect assets
  * @param {string} dir
  */
-function scanDirectory(dir) {
-  for (const entry of fs.readdirSync(dir)) {
-    const fullPath = path.join(dir, entry);
+async function scanDirectory(dir) {
+  const entries = await fs.readdir(dir, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
 
     if ([...IGNORE].some(ignore => fullPath.includes(ignore))) continue;
 
-    const stat = fs.statSync(fullPath);
-
-    if (stat.isDirectory()) {
-      scanDirectory(fullPath);
+    if (entry.isDirectory()) {
+      await scanDirectory(fullPath);
     } else {
-      // Normalize paths for cross-platform compatibility
+      // Normalize for browsers
       assets.push(fullPath.replace(/\\/g, "/").replace(/^\.\//, "./"));
     }
   }
 }
 
-// Start scanning
-scanDirectory(ROOT);
+async function generate() {
+  await scanDirectory(ROOT);
 
-// Ensure root and index.html are first
-const orderedAssets = ["./", "./index.html", ...assets.filter(a => a !== "./index.html")];
+  // Force root and index.html to top
+  const orderedAssets = ["./", "./index.html", ...assets.filter(a => a !== "./index.html")];
 
-// Generate the output JS
-const output = `
+  const output = `
 // auto-generated — do not modify manually!
 const CACHE = "flashcards-v" + Date.now();
 
 const ASSETS = ${JSON.stringify(orderedAssets, null, 2)};
 `;
 
-fs.writeFileSync("generated-assets.js", output);
+  await fs.writeFile("generated-assets.js", output);
+  console.log("✔ Cache list generated in: generated-assets.js");
+  console.log(`📦 Total assets cached: ${orderedAssets.length}`);
+}
 
-console.log("✔ Cache list generated in: generated-assets.js");
-console.log(`📦 Total assets cached: ${orderedAssets.length}`);
+generate().catch(console.error);
