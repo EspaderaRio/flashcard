@@ -79,8 +79,8 @@ function isProduction() {
 
 // Get backend URL for Render (quiz generation, flashcards, etc)
 function getBackendUrl() {
-  if (isProduction()) {
-    // On Render, use the Render service URL
+  // If on Render, use the Render service URL
+  if (window.location.hostname === 'flashcardrio.onrender.com') {
     return 'https://flashcardrio.onrender.com';
   }
   // In development, use stored URL or default to localhost
