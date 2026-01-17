@@ -39,6 +39,10 @@ app.use(cors(config.cors));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
+// Serve static files from parent directory
+const parentDir = path.dirname(__dirname);
+app.use(express.static(parentDir));
+
 // In-memory storage (replace with database in production)
 let quizzes = new Map();
 let quizCounter = 1;
@@ -688,6 +692,11 @@ app.get('/', (req, res) => {
       listQuizzes: 'GET /api/quizzes'
     }
   });
+});
+
+// Catch-all for undefined routes
+app.use((req, res) => {
+  res.status(404).json({ error: 'Endpoint not found', path: req.path, method: req.method });
 });
 
 // Error handling middleware
