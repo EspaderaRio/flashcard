@@ -1,0 +1,29 @@
+{
+  "port": 5000,
+  "environment": "production",
+  "cors": {
+    "origin": "*",
+    "credentials": true
+  },
+  "fileUpload": {
+    "maxFileSize": 10485760,
+    "allowedMimeTypes": ["application/pdf", "text/plain", "text/markdown"]
+  },
+  "ai": {
+    "provider": "groq",
+    "model": "mixtral-8x7b-32768",
+    "temperature": 0.7,
+    "maxTokens": 3000
+  },
+  "quiz": {
+    "maxQuestions": 50,
+    "minQuestions": 1,
+    "maxCharactersPerDocument": 8000,
+    "optionsCount": 4,
+    "documentOptionWeight": 0.25
+  },
+  "flashcards": {
+    "maxCards": 100,
+    "minCards": 1
+  }
+}

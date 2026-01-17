@@ -1,0 +1,42 @@
+{
+  "name": "flashcard-fullstack",
+  "version": "2.0.0",
+  "description": "AI-powered flashcard and quiz application with backend API",
+  "type": "module",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "cd backend && npm run dev",
+    "install-all": "npm install && cd backend && npm install",
+    "build": "npm run install-all && echo 'Build complete'",
+    "postinstall": "cd backend && npm install --production 2>/dev/null || true"
+  },
+  "engines": {
+    "node": "18.x",
+    "npm": "9.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EspaderaRio/flashcard.git"
+  },
+  "keywords": [
+    "flashcard",
+    "quiz",
+    "ai",
+    "education",
+    "groq",
+    "pdf"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EspaderaRio/flashcard/issues"
+  },
+  "homepage": "https://github.com/EspaderaRio/flashcard#readme",
+  "dependencies": {
+    "@capacitor/android": "^8.0.1",
+    "@capacitor/cli": "^8.0.1",
+    "@capacitor/core": "^8.0.1"
+  }
+}
+

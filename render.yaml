@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: flashcard-api
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: npm install && cd backend && npm install --production
+    startCommand: npm start
+    envVars:
+      - key: GROQ_API_KEY
+        scope: build,runtime
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+    routes:
+      - path: /api
+        destination: /api
+    healthCheckPath: /api/health
+    autoDeploy: true

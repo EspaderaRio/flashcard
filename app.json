@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "Flashcard Study Hub",
+    "slug": "flashcard",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./icons/icon-192.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./icons/icon-512.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#f8fafc"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTabletMode": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./icons/icon-192.png",
+        "backgroundColor": "#f8fafc"
+      },
+      "package": "com.rioespadera.flashcard"
+    },
+    "web": {
+      "favicon": "./icons/icon-192.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b1bd02b8-048b-4afd-bb7e-a61be6a6c722"
+      }
+    }
+  }
+}

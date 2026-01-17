@@ -1,0 +1,106 @@
+upodate``
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#	modified:   .gitignore
+#	modified:   app.js
+#	new file:   backend/.env.example
+#	new file:   backend/config.json
+#	new file:   backend/package.json
+#	new file:   backend/server.js
+#	new file:   capacitor.config.json
+#	new file:   docs/ARCHITECTURE.md
+#	new file:   docs/BACKEND_INTEGRATION_GUIDE.md
+#	new file:   docs/BACKEND_README.md
+#	new file:   docs/CHANGES_LOG.md
+#	new file:   docs/COMPLETE_SETUP.md
+#	new file:   docs/DEPLOYMENT_CHECKLIST.md
+#	new file:   docs/DEPLOYMENT_SUMMARY.md
+#	new file:   docs/DOCUMENTATION_INDEX.md
+#	new file:   docs/HYBRID_ARCHITECTURE.md
+#	new file:   docs/HYBRID_START_HERE.md
+#	new file:   docs/INDEX.md
+#	new file:   docs/INTEGRATION_CHECKLIST.md
+#	new file:   docs/INTEGRATION_SUMMARY.md
+#	new file:   docs/QUICK_REFERENCE.md
+#	new file:   docs/QUICK_START.md
+#	new file:   docs/README.md
+#	new file:   docs/RENDER_DEPLOYMENT.md
+#	new file:   docs/START_HERE.md
+#	new file:   docs/TROUBLESHOOTING.md
+#	modified:   package.json
+#	new file:   render.yaml
+#	new file:   setup.bat
+#	new file:   setup.sh
+#	new file:   www/app.js
+#	new file:   www/fonts/BBHBartle-Regular.ttf
+#	new file:   www/fonts/BBHBogle-Regular.ttf
+#	new file:   www/fonts/BBHHegarty-Regular.ttf
+#	new file:   www/fonts/GoogleSans-Italic-VariableFont_GRAD,opsz,wght.ttf
+#	new file:   www/fonts/GoogleSans-VariableFont_GRAD,opsz,wght.ttf
+#	new file:   www/fonts/OpenSans-Italic-VariableFont_wdth,wght.ttf
+#	new file:   www/fonts/OpenSans-VariableFont_wdth,wght.ttf
+#	new file:   www/fonts/Orbitron-VariableFont_wght.ttf
+#	new file:   www/fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf
+#	new file:   www/fonts/PlayfairDisplay-VariableFont_wght.ttf
+#	new file:   www/fonts/Roboto-Italic-VariableFont_wdth,wght.ttf
+#	new file:   www/fonts/Roboto-VariableFont_wdth,wght.ttf
+#	new file:   www/generate-cache-list.js
+#	new file:   www/generated-assets.js
+#	new file:   www/icons/H
+#	new file:   www/icons/add.svg
+#	new file:   www/icons/ai.svg
+#	new file:   www/icons/back.svg
+#	new file:   www/icons/delete.svg
+#	new file:   www/icons/flashcard.svg
+#	new file:   www/icons/icon-192.png
+#	new file:   www/icons/icon-512.png
+#	new file:   www/icons/import.svg
+#	new file:   www/icons/loading.svg
+#	new file:   www/icons/quiz.svg
+#	new file:   www/icons/settings.svg
+#	new file:   www/images/animals_jungle.svg
+#	new file:   www/images/animals_ocean.svg
+#	new file:   www/images/animals_safari.svg
+#	new file:   www/images/arctic.svg
+#	new file:   www/images/blackpink.svg
+#	new file:   www/images/bts.svg
+#	new file:   www/images/butterflies.svg
+#	new file:   www/images/deep_sea.svg
+#	new file:   www/images/desert.svg
+#	new file:   www/images/exo.svg
+#	new file:   www/images/farm.svg
+#	new file:   www/images/futuristic.svg
+#	new file:   www/images/itzy.svg
+#	new file:   www/images/jungle.svg
+#	new file:   www/images/jungle_night.svg
+#	new file:   www/images/lake.svg
+#	new file:   www/images/newjeans.svg
+#	new file:   www/images/ocean.svg
+#	new file:   www/images/pets.svg
+#	new file:   www/images/rainforest.svg
+#	new file:   www/images/redvelvet.svg
+#	new file:   www/images/safari.svg
+#	new file:   www/images/seventeen.svg
+#	new file:   www/images/straykids.svg
+#	new file:   www/images/tropical_birds.svg
+#	new file:   www/images/twice.svg
+#	new file:   www/index.html
+#	new file:   www/index1.html
+#	new file:   www/manifest.json
+#	new file:   www/pdfs/basic-electronics.pdf
+#	new file:   www/pdfs/basic-electronics.txt
+#	new file:   www/pdfs/learning-tips.txt
+#	new file:   www/pdfs/quick-reference.txt
+#	new file:   www/pdfs/quiz-instructions.txt
+#	new file:   www/pdfs/sample-import.txt
+#	new file:   www/pdfs/study-guide.txt
+#	new file:   www/server.js
+#	new file:   www/service-worker.js
+#	new file:   www/styles.css
+#	new file:   www/tailwindcss.js
+#
