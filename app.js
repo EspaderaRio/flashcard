@@ -80,8 +80,8 @@ function isProduction() {
 // Get backend URL for Render (quiz generation, flashcards, etc)
 function getBackendUrl() {
   if (isProduction()) {
-    // On Render, backend runs on same domain
-    return window.location.origin;
+    // On Render, use the Render service URL
+    return 'https://flashcardrio.onrender.com';
   }
   // In development, use stored URL or default to localhost
   return localStorage.getItem('backendUrl') || 'http://localhost:5000';
@@ -7207,7 +7207,7 @@ window.addEventListener("appinstalled", () => {
 });
 
 
-if ("serviceWorker" in navigator) {
+if ("serviceWorker" in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("./service-worker.js")
       .then(registration => {
